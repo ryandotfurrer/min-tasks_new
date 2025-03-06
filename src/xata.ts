@@ -90,8 +90,7 @@ export type DatabaseSchema = {
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
-  databaseURL:
-    "https://Ryan-Furrer-s-workspace-ss820h.us-east-1.xata.sh/db/min-tasks",
+  databaseURL: process.env.XATA_DATABASE_URL,
   apiKey: process.env.XATA_API_KEY,
   branch: process.env.XATA_BRANCH,
 };
