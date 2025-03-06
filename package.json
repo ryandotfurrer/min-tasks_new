@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "pnpm next dev",
+    "build": "pnpm next build",
+    "start": "pnpm next start",
+    "lint": "pnpm next lint"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.12.4",
@@ -56,5 +56,10 @@
     "eslint-config-next": "15.2.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
   }
 }
