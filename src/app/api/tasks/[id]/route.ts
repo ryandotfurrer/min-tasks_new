@@ -1,19 +1,31 @@
-import { getXataClient } from "@/xata"; // Adjust path as needed
+// src/app/api/tasks/[id]/route.ts
+import { getXataClient } from "@/xata";
 import { NextRequest, NextResponse } from "next/server";
 
 const xata = getXataClient();
 
+interface Params {
+  id: string;
+}
+
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } } // Correctly type the second argument
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
   try {
+    const { id } = await params; // Extract the ID from params
     const { completed } = await req.json();
-    const { id } = params; // Extract id directly from params
 
     if (!id) {
       return NextResponse.json(
         { message: "Task ID is required" },
+        { status: 400 }
+      );
+    }
+
+    if (typeof completed !== "boolean") {
+      return NextResponse.json(
+        { message: "Completed must be a boolean" },
         { status: 400 }
       );
     }
@@ -26,9 +38,14 @@ export async function PUT(
       { message: "Task updated successfully" },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
+    // Explicitly type error
+    console.error("Error updating task:", error);
     return NextResponse.json(
-      { message: "Failed to update task" },
+      {
+        message: "Failed to update task",
+        error: error.message || "Unknown error",
+      },
       { status: 500 }
     );
   }
