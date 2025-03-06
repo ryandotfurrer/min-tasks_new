@@ -1,8 +1,23 @@
 import Image from "next/image";
+import { getXataClient } from "@/xata";
+
+const xata = getXataClient();
+
+const records = await xata.db.tasks
+  .select(["xata_id", "taskCompleted", "taskName"])
+  .getAll();
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <ul>
+        {records.map((record) => (
+          <li key={record.xata_id}>
+            {record.taskName} -{" "}
+            {record.taskCompleted ? "Completed" : "Incomplete"}
+          </li>
+        ))}
+      </ul>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
