@@ -29,11 +29,9 @@ function TaskForm({ onTaskCreated }: TaskFormProps) {
       }
 
       const newTask = await response.json();
-      console.log("New task created:", newTask);
       onTaskCreated?.(newTask);
       setTitle("");
     } catch (error) {
-      console.error("Failed to create task:", error);
     } finally {
       setIsSubmitting(false);
     }

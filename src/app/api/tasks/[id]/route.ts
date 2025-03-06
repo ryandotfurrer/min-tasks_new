@@ -1,4 +1,3 @@
-// app/api/tasks/[id]/route.ts
 import { getXataClient } from "@/xata"; // Adjust path as needed
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,13 +5,11 @@ const xata = getXataClient();
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params }: { params: { id: string } } // Correctly type the second argument
+): Promise<NextResponse> {
   try {
-    const { id } = params;
     const { completed } = await req.json();
-
-    console.log("Updating task with ID:", id, "to completed:", completed); // Debugging log
+    const { id } = params; // Extract id directly from params
 
     if (!id) {
       return NextResponse.json(
@@ -25,14 +22,11 @@ export async function PUT(
       taskCompleted: completed,
     });
 
-    console.log("Task updated successfully in database"); // Debugging log
-
     return NextResponse.json(
       { message: "Task updated successfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error updating task:", error);
     return NextResponse.json(
       { message: "Failed to update task" },
       { status: 500 }

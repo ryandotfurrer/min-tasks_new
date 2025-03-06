@@ -12,7 +12,6 @@ export async function POST(req: NextRequest) {
     });
     return NextResponse.json(newTask);
   } catch (error) {
-    console.error("Error adding task: ", error);
     return NextResponse.json(
       { message: "Failed to add task" },
       { status: 500 }

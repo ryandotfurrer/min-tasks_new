@@ -28,9 +28,7 @@ function TaskList() {
 
       // Revalidate the tasks data to update the UI
       mutate("/api/tasks");
-    } catch (error) {
-      console.error("Failed to update task:", error);
-    }
+    } catch (error) {}
   };
 
   return (
