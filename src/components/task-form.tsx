@@ -2,6 +2,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 interface TaskFormProps {
   onTaskCreated?: (newTask: any) => void;
@@ -38,17 +40,17 @@ function TaskForm({ onTaskCreated }: TaskFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form onSubmit={handleSubmit} className="flex gap-2">
+      <Input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Task title"
         required
       />
-      <button type="submit" disabled={isSubmitting}>
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Creating..." : "Create Task"}
-      </button>
+      </Button>
     </form>
   );
 }
