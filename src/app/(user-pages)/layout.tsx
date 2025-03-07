@@ -9,7 +9,6 @@ import {
 } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,27 +37,12 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <div className="px-4 max-w-screen-lg mx-auto">
-            <nav className="flex justify-between py-8">
-              <Link href="/">min tasks</Link>
-              <div className="gap-4 hidden md:flex">
-                <Link href="/">features</Link>
-                <Link href="/">pricing</Link>
-                <Link href="/">about</Link>
-              </div>
-              <div className="flex gap-4">
-                <SignedOut>
-                  <SignInButton />
-                  <SignUpButton />
-                </SignedOut>
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
-              </div>
-            </nav>
-            {children}
-            <footer className="py-8 mt-12 border-t">Made by Ryan Furrer</footer>
-          </div>
+          <header className="flex justify-end items-center p-4 gap-4 h-16">
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </header>
+          {children}
         </body>
       </html>
     </ClerkProvider>
