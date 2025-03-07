@@ -1,6 +1,7 @@
 // src/app/api/tasks/[id]/route.ts
 import { getXataClient } from "@/xata";
 import { NextRequest, NextResponse } from "next/server";
+import { currentUser } from "@clerk/nextjs/server";
 
 const xata = getXataClient();
 
@@ -15,6 +16,12 @@ export async function PUT(
   try {
     const { id } = await params; // Extract the ID from params
     const { completed } = await req.json();
+    const user = await currentUser();
+    const clerkUserId = user?.id;
+
+    if (!user) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
 
     if (!id) {
       return NextResponse.json(

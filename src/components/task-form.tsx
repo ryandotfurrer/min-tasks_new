@@ -1,4 +1,3 @@
-// components/TaskForm.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -27,7 +26,7 @@ function TaskForm({ onTaskCreated }: TaskFormProps) {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/tasks/create", {
+      const response = await fetch("/api/tasks/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
