@@ -10,6 +10,7 @@ import {
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,8 +49,14 @@ export default function RootLayout({
               </div>
               <div className="flex gap-4">
                 <SignedOut>
-                  <SignInButton />
-                  <SignUpButton />
+                  <SignInButton>
+                    <Button variant="outline" className="cursor-pointer">
+                      Sign In
+                    </Button>
+                  </SignInButton>
+                  <SignUpButton>
+                    <Button className="cursor-pointer">Sign Up</Button>
+                  </SignUpButton>
                 </SignedOut>
                 <SignedIn>
                   <UserButton />

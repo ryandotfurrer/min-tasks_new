@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cv5l10t2t0po8jv9to40",
+    "operations": [
+      {
+        "add_column": {
+          "table": "tasks",
+          "column": {
+            "name": "clerkUserId",
+            "type": "text",
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cv5l10t2t0po8jv9to40",
+  "parent": "mig_cv5hstl2t0po8jv9tnc0",
+  "schema": "public",
+  "startedAt": "2025-03-07T20:01:08.378314Z"
+}

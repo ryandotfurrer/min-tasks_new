@@ -1,10 +1,17 @@
-// src/app/api/tasks/create/route.ts
+import { currentUser } from "@clerk/nextjs/server";
 import { getXataClient } from "@/xata";
 import { NextRequest, NextResponse } from "next/server";
 
 const xata = getXataClient();
 
 export async function POST(req: NextRequest) {
+  const user = await currentUser();
+  const clerkUserId = user?.id;
+
+  if (!user) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const { taskName } = await req.json();
 
@@ -18,6 +25,7 @@ export async function POST(req: NextRequest) {
     const newTask = await xata.db.tasks.create({
       taskCompleted: false,
       taskName: taskName.trim(), // Trim whitespace
+      clerkUserId: clerkUserId,
     });
 
     return NextResponse.json(newTask, { status: 201 }); // Explicitly set status to 201 (Created)

@@ -26,6 +26,14 @@ const tables = [
     },
     columns: [
       {
+        name: "clerkUserId",
+        type: "text",
+        notNull: false,
+        unique: false,
+        defaultValue: null,
+        comment: "",
+      },
+      {
         name: "p0",
         type: "bool",
         notNull: false,
