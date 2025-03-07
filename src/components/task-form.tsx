@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { mutate } from "swr";
 
 interface TaskFormProps {
   onTaskCreated?: (newTask: any) => void;
@@ -41,6 +42,9 @@ function TaskForm({ onTaskCreated }: TaskFormProps) {
       const newTask = await response.json();
       onTaskCreated?.(newTask);
       setTitle("");
+
+      // Revalidate the tasks data to update the UI
+      mutate("/api/tasks");
     } catch (error) {
     } finally {
       setIsSubmitting(false);
