@@ -6,7 +6,7 @@ const xata = getXataClient();
 
 export async function GET() {
   try {
-    const tasks = await xata.db.tasks.getAll();
+    const tasks = (await xata.db.tasks.getAll()).slice(0, 7);
     return NextResponse.json(tasks);
   } catch (error: any) {
     // Explicitly type 'error' as 'any' or 'Error'

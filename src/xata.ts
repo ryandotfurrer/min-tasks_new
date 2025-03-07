@@ -26,6 +26,14 @@ const tables = [
     },
     columns: [
       {
+        name: "p0",
+        type: "bool",
+        notNull: false,
+        unique: false,
+        defaultValue: "false",
+        comment: "",
+      },
+      {
         name: "taskCompleted",
         type: "bool",
         notNull: false,
@@ -90,9 +98,8 @@ export type DatabaseSchema = {
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
-  databaseURL: process.env.XATA_DATABASE_URL,
-  apiKey: process.env.XATA_API_KEY,
-  branch: process.env.XATA_BRANCH,
+  databaseURL:
+    "https://Ryan-Furrer-s-workspace-ss820h.us-east-1.xata.sh/db/min-tasks",
 };
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {
